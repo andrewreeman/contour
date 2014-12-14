@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7E0925CD-D348-4EAC-B0FE-F3BD55DEECB9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Contour</RootNamespace>
+    <AssemblyName>Contour</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Sanford.Collections">
+      <HintPath>..\..\..\..\Toots\CSharp_Toots\Sanford_MIDI_Test\MidiTester\Sanford.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Multimedia">
+      <HintPath>..\..\..\..\Toots\CSharp_Toots\Sanford_MIDI_Test\MidiTester\Sanford.Multimedia.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Multimedia.Timers">
+      <HintPath>..\..\..\..\Toots\CSharp_Toots\Sanford_MIDI_Test\MidiTester\Sanford.Multimedia.Timers.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Threading">
+      <HintPath>..\..\..\..\Toots\CSharp_Toots\Sanford_MIDI_Test\MidiTester\Sanford.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Clocks\IClock.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Clocks\MidiInternalClock.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Clocks\PpqnClock.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\InputDevice Class\InputDevice.Construction.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\InputDevice Class\InputDevice.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\InputDevice Class\InputDevice.Events.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\InputDevice Class\InputDevice.Fields.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\InputDevice Class\InputDevice.Messaging.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\InputDevice Class\InputDevice.Properties.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\InputDevice Class\InputDevice.PublicMethods.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\InputDevice Class\InputDevice.Win32.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\InputDevice Class\MidiInCaps.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\MidiDevice.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\MidiDeviceException.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\MidiHeader.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\MidiHeaderBuilder.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\OutputDevice Classes\MidiOutCaps.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\OutputDevice Classes\NoOpEventArgs.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\OutputDevice Classes\OutputDevice.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\OutputDevice Classes\OutputDeviceBase.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Device Classes\OutputDevice Classes\OutputStream.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\GeneralMidi.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\ChannelMessage.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\EventArgs\ChannelMessageEventArgs.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\EventArgs\InvalidShortMessageEventArgs.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\EventArgs\InvalidSysExMessageEventArgs.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\EventArgs\MetaMessageEventArgs.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\EventArgs\SysCommonMessageEventArgs.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\EventArgs\SysExMessageEventArgs.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\EventArgs\SysRealtimeMessageEventArgs.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\IMidiMessage.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\Message Builders\ChannelMessageBuilder.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\Message Builders\IMessageBuilder.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\Message Builders\KeySignatureBuilder.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\Message Builders\MetaTextBuilder.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\Message Builders\SongPositionPointerBuilder.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\Message Builders\SysCommonMessageBuilder.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\Message Builders\TempoChangeBuilder.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\Message Builders\TimeSignatureBuilder.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\MessageDispatcher.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\MetaMessage.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\ShortMessage.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\SysCommonMessage.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\SysExMessage.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Messages\SysRealtimeMessage.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\MidiNoteConverter.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Processing\ChannelChaser.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Processing\ChannelStopper.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Processing\ChasedEventArgs.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Processing\StoppedEventArgs.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Sequencing\MidiEvent.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Sequencing\MidiFileProperties.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Sequencing\RecordingSession.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Sequencing\Sequence.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Sequencing\Sequencer.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Sequencing\Track Classes\Track.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Sequencing\Track Classes\Track.Iterators.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Sequencing\Track Classes\Track.Test.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Sequencing\Track Classes\TrackReader.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\Sequencing\Track Classes\TrackWriter.cs" />
+    <Compile Include="Sanford.Multimedia.Midi\UI\DeviceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sanford.Multimedia.Midi\UI\DeviceDialog.Designer.cs">
+      <DependentUpon>DeviceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sanford.Multimedia.Midi\UI\InputDeviceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sanford.Multimedia.Midi\UI\InputDeviceDialog.Designer.cs">
+      <DependentUpon>InputDeviceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sanford.Multimedia.Midi\UI\OutputDeviceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sanford.Multimedia.Midi\UI\OutputDeviceDialog.Designer.cs">
+      <DependentUpon>OutputDeviceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sanford.Multimedia.Midi\UI\PianoControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Sanford.Multimedia.Midi\UI\PianoControl.PianoKey.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Sanford.Multimedia.Midi\UI\PianoControlDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sanford.Multimedia.Midi\UI\PianoControlDialog.Designer.cs">
+      <DependentUpon>PianoControlDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sanford.Multimedia.Midi\UI\PianoKeyEventArgs.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Sanford.Multimedia.Midi\UI\DeviceDialog.resx">
+      <DependentUpon>DeviceDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sanford.Multimedia.Midi\UI\InputDeviceDialog.resx">
+      <DependentUpon>InputDeviceDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sanford.Multimedia.Midi\UI\OutputDeviceDialog.resx">
+      <DependentUpon>OutputDeviceDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sanford.Multimedia.Midi\UI\PianoControlDialog.resx">
+      <DependentUpon>PianoControlDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Sanford.Multimedia.Midi\Documentation.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
