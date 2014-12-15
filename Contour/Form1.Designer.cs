@@ -38,6 +38,7 @@
             this.ui_radioBelow = new System.Windows.Forms.RadioButton();
             this.ui_submit = new System.Windows.Forms.Button();
             this.ui_feedback = new System.Windows.Forms.Label();
+            this.ui_score = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -141,13 +142,22 @@
             this.ui_feedback.Size = new System.Drawing.Size(52, 13);
             this.ui_feedback.TabIndex = 10;
             this.ui_feedback.Text = "feedback";
-            
+            // 
+            // ui_score
+            // 
+            this.ui_score.AutoSize = true;
+            this.ui_score.Location = new System.Drawing.Point(256, 194);
+            this.ui_score.Name = "ui_score";
+            this.ui_score.Size = new System.Drawing.Size(35, 13);
+            this.ui_score.TabIndex = 11;
+            this.ui_score.Text = "Score";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 262);
+            this.Controls.Add(this.ui_score);
             this.Controls.Add(this.ui_feedback);
             this.Controls.Add(this.ui_submit);
             this.Controls.Add(this.ui_radioBelow);
@@ -176,6 +186,7 @@
         private System.Windows.Forms.RadioButton ui_radioBelow;
         private System.Windows.Forms.Button ui_submit;
         private System.Windows.Forms.Label ui_feedback;
+        private System.Windows.Forms.Label ui_score;
     }
 }
 

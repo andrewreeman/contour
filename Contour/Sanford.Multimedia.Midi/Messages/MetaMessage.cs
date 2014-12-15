@@ -332,7 +332,7 @@ namespace Sanford.Multimedia.Midi
         // Calculates the hash code.
         private void CalculateHashCode()
         {            
-            // TODO: This algorithm may need work.
+            
 
             hashCode = (int)MetaType;
 
