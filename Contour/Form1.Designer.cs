@@ -42,25 +42,25 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button1.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(2, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 27);
+            this.button1.Size = new System.Drawing.Size(154, 30);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Select midi file";
+            this.button1.Text = "Select midi &file";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // PlayMelody
             // 
-            this.PlayMelody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.PlayMelody.BackColor = System.Drawing.Color.LightSteelBlue;
             this.PlayMelody.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PlayMelody.Location = new System.Drawing.Point(332, 12);
             this.PlayMelody.Name = "PlayMelody";
             this.PlayMelody.Size = new System.Drawing.Size(75, 30);
             this.PlayMelody.TabIndex = 2;
-            this.PlayMelody.Text = "Play Melody";
+            this.PlayMelody.Text = "&Play Melody";
             this.PlayMelody.UseVisualStyleBackColor = false;
             this.PlayMelody.Click += new System.EventHandler(this.PlayMelody_Click);
             // 
@@ -125,13 +125,14 @@
             // 
             // ui_submit
             // 
-            this.ui_submit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ui_submit.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.ui_submit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ui_submit.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ui_submit.Location = new System.Drawing.Point(578, 194);
             this.ui_submit.Name = "ui_submit";
             this.ui_submit.Size = new System.Drawing.Size(75, 27);
             this.ui_submit.TabIndex = 9;
-            this.ui_submit.Text = "Submit";
+            this.ui_submit.Text = "&Submit";
             this.ui_submit.UseVisualStyleBackColor = false;
             this.ui_submit.Click += new System.EventHandler(this.ui_submit_Click);
             // 
@@ -159,6 +160,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(766, 262);
             this.Controls.Add(this.ui_score);
             this.Controls.Add(this.ui_feedback);
