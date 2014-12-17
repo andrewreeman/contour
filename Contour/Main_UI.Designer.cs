@@ -1,6 +1,6 @@
 ﻿namespace Contour
 {
-    partial class Form1
+    partial class Main_UI
     {
         /// <summary>
         /// Required designer variable.
