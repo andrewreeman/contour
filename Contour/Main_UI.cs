@@ -15,6 +15,7 @@ namespace Contour
     {       
         public Main_UI()
         {
+
             InitializeComponent();
             this.GameEngine = new GameEngine();
             NextGo();

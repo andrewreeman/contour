@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\libs\CSharp\Json\Bin\Net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Sanford.Collections">
       <HintPath>..\..\..\..\Toots\CSharp_Toots\Sanford_MIDI_Test\MidiTester\Sanford.Collections.dll</HintPath>
     </Reference>
@@ -158,6 +161,7 @@
       <DependentUpon>PianoControlDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Sanford.Multimedia.Midi\UI\PianoKeyEventArgs.cs" />
+    <Compile Include="UserSettings.cs" />
     <EmbeddedResource Include="Main_UI.resx">
       <DependentUpon>Main_UI.cs</DependentUpon>
     </EmbeddedResource>

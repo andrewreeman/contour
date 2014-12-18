@@ -22,17 +22,5 @@ namespace Contour.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UserScore {
-            get {
-                return ((string)(this["UserScore"]));
-            }
-            set {
-                this["UserScore"] = value;
-            }
-        }
     }
 }
