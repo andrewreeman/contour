@@ -29,8 +29,16 @@ namespace Contour
                 
             this.MidiFiles = new List<string>(Directory.GetFiles(@"../../media/"));                               
             this.UserScore = 0;
+            try
+            {
+                this.UserSettings = new UserSettings("settings.json");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: GameEngine.UserSettings could not be initalized." + e.Message);
+                this.UserSettings = null;
+            }
         }
-
 
         private NoteData RandNote()
         {
@@ -65,7 +73,35 @@ namespace Contour
                 return (int)NoteDirection.BELOW;
             }
         }
-              
+
+        public List<UserData> GetAllUsersInfo()
+        {
+            if (this.UserSettings != null)
+                return this.UserSettings.GetAllUsersInfo();
+            else throw new InvalidOperationException("UserSettings not initialized.");
+        }
+
+        public void AddUser(string userName)
+        {
+            if (this.UserSettings != null)
+                this.UserSettings.AddUser(userName);
+            else throw new InvalidOperationException("UserSettings not initialized.");
+        }
+        public void RemoveUser(string userName)
+        {
+            if (this.UserSettings != null)
+                this.UserSettings.RemoveUser(userName);
+            else throw new InvalidOperationException("UserSettings not initialized.");
+        }
+        public void SetActiveUser(string userName)
+        {
+            if (this.UserSettings != null)
+            {
+                this.UserSettings.SetActiveUser(userName);
+                this.UserScore = this.UserSettings.GetUserScore();
+            }
+            else throw new InvalidOperationException("UserSettings not initialized.");
+        }
         //TODO test all midi files
         public void NextGo()
         {
@@ -82,6 +118,7 @@ namespace Contour
             
         public bool isUserCorrect(){
             if(UserSelected == CorrectDirection){
+                //TODO link score with ui and usersettings
                 return true;
             }
             else{
@@ -105,6 +142,7 @@ namespace Contour
         public int UserSelected {get; set;}            
         public int UserScore { get; set; } //TODO to bind
         private MidiEngine MidiEngine;
+        private UserSettings UserSettings;
     }
 }
 

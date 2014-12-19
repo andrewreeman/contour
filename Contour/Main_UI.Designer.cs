@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.PlayMelody = new System.Windows.Forms.Button();
             this.ui_songTitle = new System.Windows.Forms.Label();
@@ -40,6 +41,17 @@
             this.ui_score = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.ui_userNames = new System.Windows.Forms.ListBox();
+            this.ui_addUser = new System.Windows.Forms.Button();
+            this.ui_newUsername = new System.Windows.Forms.TextBox();
+            this.ui_RemoveUser = new System.Windows.Forms.Button();
+            this.ui_RemoveUsername = new System.Windows.Forms.TextBox();
+            this.userSettingsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ui_ActiveUsername = new System.Windows.Forms.TextBox();
+            this.ui_SetActiveUser = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.userSettingsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -180,12 +192,87 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "Score:";
             // 
-            // Form1
+            // ui_userNames
+            // 
+            this.ui_userNames.FormattingEnabled = true;
+            this.ui_userNames.Location = new System.Drawing.Point(33, 88);
+            this.ui_userNames.Name = "ui_userNames";
+            this.ui_userNames.Size = new System.Drawing.Size(120, 95);
+            this.ui_userNames.TabIndex = 14;
+            // 
+            // ui_addUser
+            // 
+            this.ui_addUser.Location = new System.Drawing.Point(33, 189);
+            this.ui_addUser.Name = "ui_addUser";
+            this.ui_addUser.Size = new System.Drawing.Size(75, 23);
+            this.ui_addUser.TabIndex = 15;
+            this.ui_addUser.Text = "Add User";
+            this.ui_addUser.UseVisualStyleBackColor = true;
+            this.ui_addUser.Click += new System.EventHandler(this.ui_addUser_Click);
+            // 
+            // ui_newUsername
+            // 
+            this.ui_newUsername.Location = new System.Drawing.Point(115, 191);
+            this.ui_newUsername.Name = "ui_newUsername";
+            this.ui_newUsername.Size = new System.Drawing.Size(100, 20);
+            this.ui_newUsername.TabIndex = 16;
+            // 
+            // ui_RemoveUser
+            // 
+            this.ui_RemoveUser.Location = new System.Drawing.Point(33, 212);
+            this.ui_RemoveUser.Name = "ui_RemoveUser";
+            this.ui_RemoveUser.Size = new System.Drawing.Size(75, 23);
+            this.ui_RemoveUser.TabIndex = 17;
+            this.ui_RemoveUser.Text = "Remove User";
+            this.ui_RemoveUser.UseVisualStyleBackColor = true;
+            this.ui_RemoveUser.Click += new System.EventHandler(this.ui_RemoveUser_Click);
+            // 
+            // ui_RemoveUsername
+            // 
+            this.ui_RemoveUsername.Location = new System.Drawing.Point(115, 217);
+            this.ui_RemoveUsername.Name = "ui_RemoveUsername";
+            this.ui_RemoveUsername.Size = new System.Drawing.Size(100, 20);
+            this.ui_RemoveUsername.TabIndex = 18;
+            // 
+            // userSettingsBindingSource
+            // 
+            this.userSettingsBindingSource.DataSource = typeof(Contour.UserSettings);
+            // 
+            // userDataBindingSource
+            // 
+            this.userDataBindingSource.DataSource = typeof(Contour.UserData);
+            // 
+            // ui_ActiveUsername
+            // 
+            this.ui_ActiveUsername.Location = new System.Drawing.Point(115, 246);
+            this.ui_ActiveUsername.Name = "ui_ActiveUsername";
+            this.ui_ActiveUsername.Size = new System.Drawing.Size(100, 20);
+            this.ui_ActiveUsername.TabIndex = 20;
+            this.ui_ActiveUsername.TextChanged += new System.EventHandler(this.ui_ActiveUsername_TextChanged);
+            // 
+            // ui_SetActiveUser
+            // 
+            this.ui_SetActiveUser.Location = new System.Drawing.Point(33, 241);
+            this.ui_SetActiveUser.Name = "ui_SetActiveUser";
+            this.ui_SetActiveUser.Size = new System.Drawing.Size(75, 23);
+            this.ui_SetActiveUser.TabIndex = 19;
+            this.ui_SetActiveUser.Text = "Set active";
+            this.ui_SetActiveUser.UseVisualStyleBackColor = true;
+
+            // 
+            // Main_UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(766, 262);
+            this.Controls.Add(this.ui_ActiveUsername);
+            this.Controls.Add(this.ui_SetActiveUser);
+            this.Controls.Add(this.ui_RemoveUsername);
+            this.Controls.Add(this.ui_RemoveUser);
+            this.Controls.Add(this.ui_newUsername);
+            this.Controls.Add(this.ui_addUser);
+            this.Controls.Add(this.ui_userNames);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ui_score);
@@ -198,7 +285,10 @@
             this.Controls.Add(this.ui_songTitle);
             this.Controls.Add(this.PlayMelody);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "Main_UI";
+            this.Load += new System.EventHandler(this.Main_UI_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.userSettingsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,6 +308,15 @@
         private System.Windows.Forms.Label ui_score;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.BindingSource userSettingsBindingSource;
+        private System.Windows.Forms.BindingSource userDataBindingSource;
+        private System.Windows.Forms.ListBox ui_userNames;
+        private System.Windows.Forms.Button ui_addUser;
+        private System.Windows.Forms.TextBox ui_newUsername;
+        private System.Windows.Forms.Button ui_RemoveUser;
+        private System.Windows.Forms.TextBox ui_RemoveUsername;
+        private System.Windows.Forms.TextBox ui_ActiveUsername;
+        private System.Windows.Forms.Button ui_SetActiveUser;
     }
 }
 

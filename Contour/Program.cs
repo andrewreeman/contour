@@ -16,18 +16,9 @@ namespace Contour
         [STAThread]
         static void Main()
         {
-        /*    Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main_UI()); */
-            UserSettings settings = new UserSettings("settings.json");
-            List<UserData> AllUsers = settings.AllUsers;
-            UserData user = AllUsers.ElementAt(0);
-            user.Name = "harry";
-            
-            settings.Save();
-            
-
-
+            Application.Run(new Main_UI()); 
         }
     }
 }

@@ -16,69 +16,100 @@ namespace Contour
     // User1{key: value, key: value} User2{key: value...}...
     class UserData
     {
+        public UserData()
+        {
+            this.Name = "";
+            this.Score = 0;
+        }
         public string Name { get; set; }
         public int Score { get; set; }
     }
     class UserSettings
     {
-        public UserSettings(string settingsPath) {
-            
-
+        public UserSettings(string settingsPath)
+        {
             if (File.Exists(settingsPath))
-            {//TODO try catch!
-                StreamReader reader = new StreamReader(settingsPath);              
+            {
+                StreamReader reader = new StreamReader(settingsPath);
                 string settingsContents = reader.ReadToEnd();
-                this.AllUsers = JsonConvert.DeserializeObject< List<UserData> >(settingsContents);
-                //Console.WriteLine(listData.ElementAt(0).Name); // SO SIMPLE!
+                this.AllUsers = JsonConvert.DeserializeObject<List<UserData>>(settingsContents);
                 reader.Close();
             }
-            this.SettingsPath = settingsPath;
-            /*else
+            else
             {
-                UserData data = new UserData();
-                data.Name = "bob";
-                data.Score = 5;
-                UserData data2 = new UserData();
-                data2.Name = "barry";
-                data2.Score = 3;
-
-
-                List<UserData> listData = new List<UserData>(2);
-                listData.Add(data);
-                listData.Add(data2);
-
-                string output = JsonConvert.SerializeObject(listData);
-                Console.WriteLine(output);
-                StreamWriter writer = new StreamWriter(settingsPath);
-                
-                writer.Write(output);
-                writer.Close();
-
-                Console.WriteLine("Written: " + output);
-            } */
-        
+                this.AllUsers = new List<UserData>();
+            }
+            this.SettingsPath = settingsPath;
+            activeUser = null;
         }
+
+        public List<UserData> GetAllUsersInfo()
+        {
+            List<UserData> copy = new List<UserData>();
+            foreach (UserData user in AllUsers)
+            {
+                UserData copyUser = new UserData();
+                copyUser.Name = user.Name;
+                copyUser.Score = user.Score;
+                copy.Add(copyUser);
+            }
+            return copy;
+        }
+
         
         public void AddUser(string userName) {
-            
+            if (isUserExist(userName)) throw new ArgumentException("UserSettings.AddUser(string): User " + userName + " already exists. ");
             UserData newUser = new UserData();
             newUser.Name = userName;
             newUser.Score = 0;
             this.AllUsers.Add(newUser);
             this.Save();
         }
-        
-        
+
+        public void RemoveUser(string userName)
+        {
+            if (isUserExist(userName))
+            {
+                for (int i = 0; i < AllUsers.Count; ++i)
+                {
+                    UserData user = AllUsers.ElementAt(i);
+                    if (user.Name == userName)
+                    {
+                        AllUsers.Remove(user); //Do not save yet. Gives the user a chance to quit the program to undo.
+                    }
+                }
+            }
+            else throw new ArgumentException("UserSettings.RemoveUser(string): User " + userName + " does not exist. ");
+        }
+
+        public void SetActiveUser(string userName)
+        {
+            activeUser = getUser(userName);
+        }
         public int GetUserScore(string userName){
             UserData userData = getUser(userName);           
             return userData.Score;
         }
-        
+
+        public int GetUserScore()
+        {
+            if (activeUser == null) throw new InvalidOperationException();
+            return activeUser.Score;
+        }
+      
         public void SetUserScore(string userName, int newScore) {
             UserData userData = getUser(userName);
             userData.Score = newScore;
             this.Save();
         }
+
+        public void SetUserScore(int newScore)
+        {
+            if (activeUser == null) throw new InvalidOperationException();
+            activeUser.Score = newScore;
+            this.Save();
+        }
+
         public void AddToUserScore(string userName, int additionToScore)
         {
             UserData userData = getUser(userName);
@@ -86,32 +117,60 @@ namespace Contour
             this.Save();
         }
 
-        public void ChangeUserName(string userName, string newUserName){
+        public void AddToUserScore(int additionToScore)
+        {
+            if (activeUser == null) throw new InvalidOperationException();
+            activeUser.Score += additionToScore;
+            this.Save();
+        }
+
+        public void ChangeUserName(string userName, string newUserName)
+        {
             UserData userData = getUser(userName);
             userData.Name = newUserName;
             this.Save();
         }
+
         public void Save()
         {
-            string output = JsonConvert.SerializeObject(AllUsers);
-            StreamWriter writer = new StreamWriter(SettingsPath);
-            writer.Write(output);
-            writer.Close();
+            if (AllUsers.Count > 0)
+            {
+                string output = JsonConvert.SerializeObject(AllUsers);
+                StreamWriter writer = new StreamWriter(SettingsPath);
+                writer.Write(output);
+                writer.Close();
+            }
         }
-        
-        public List<UserData> AllUsers { get; private set; }
+
+        private List<UserData> AllUsers;
         public string SettingsPath { get; private set; }
 
         private UserData getUser(string userName)
+        {
+            if(isUserExist(userName))
+            {
+                foreach (UserData user in AllUsers)
+                {
+                    if (user.Name == userName)
+                    {
+                        return user;
+                    }
+                }
+            }
+            throw new ArgumentException("UserSettings.getUser(string): User name " + userName + "does not exist.");
+        }
+
+        private bool isUserExist(string userName)
         {
             foreach (UserData user in AllUsers)
             {
                 if (user.Name == userName)
                 {
-                    return user;
+                    return true;
                 }
             }
-            throw new ArgumentException("userName does not exist.");
+            return false;
         }
-    }
+        private UserData activeUser;
+    }   
 }
