@@ -18,6 +18,16 @@ namespace Contour
             InitializeComponent();       
         }
 
+        public void OnUserScoreChanged(object sender, UserDataEventArgs e)
+        {
+            ui_score.Text = e.UserData.Score.ToString();
+        }
+        //TODO annoymous methods
+        public void OnUserNameChanged(object sender, UserDataEventArgs e)
+        {
+               ui_userName.Text = e.UserData.Name;
+        }
+
         private void Main_UI_Load(object sender, EventArgs e)
         {
             try
@@ -38,6 +48,9 @@ namespace Contour
             ui_radioAbove.Checked = true;
             initTimers();
             initUserDataList();
+            this.GameEngine.UserSettings.UserScoreChanged += OnUserScoreChanged;
+            this.GameEngine.UserSettings.UserNameChanged += OnUserNameChanged;
+
         }
 
         private void initUserDataList()
@@ -91,7 +104,7 @@ namespace Contour
         {
             invokeLabelReset();
         }
-
+        
         private void invokeLabelReset()
         {
             if (ui_feedback.InvokeRequired)
@@ -108,7 +121,7 @@ namespace Contour
         {           
             if( this.GameEngine.SubmitAnswer(this.userSelected) )
             {
-                ui_score.Text = GameEngine.UserScore.ToString();
+                //ui_score.Text = GameEngine.UserScore.ToString();
                 ui_feedback.Text = "Correct!";                
                 NextGo();
                 
@@ -189,7 +202,7 @@ namespace Contour
                     if (this.GameEngine.UserSettings != null)
                         this.GameEngine.SetActiveUser(activeUser);
                     ui_score.Text = this.GameEngine.UserScore.ToString();
-                    ui_userName.Text = this.GameEngine.UserSettings.GetUserName();
+                 //   ui_userName.Text = this.GameEngine.UserSettings.GetUserName();
                     ui_ActiveUsername.Text = "";
                 }
                 catch (ArgumentException argEx)

@@ -10,20 +10,45 @@ using Newtonsoft.Json;
 namespace Contour
 {
 
-    class UserData
+    public class UserData
     {
         public UserData()
         {
             this.Name = "";
             this.Score = 0;
         }
+
+        public UserData(string name, int score)
+        {
+            this.Name = name;
+            this.Score = score;
+        }
+
         public string Name { get; set; }
         public int Score { get; set; }
     }
+
+    public class UserDataEventArgs : EventArgs
+    {
+        public UserDataEventArgs(UserData data)
+        {
+            this.UserData = data;
+        }
+
+        public UserData UserData;
+
+    }
+
     class UserSettings
     {
+      
+        public delegate void UserDataEventHandler(object sender, UserDataEventArgs e);
+        public event UserDataEventHandler UserScoreChanged;
+        public event UserDataEventHandler UserNameChanged;
+
         public UserSettings(string settingsPath)
         {
+            
             if (File.Exists(settingsPath))
             {
                 StreamReader reader = new StreamReader(settingsPath);
@@ -41,9 +66,7 @@ namespace Contour
                 this.SetActiveUser("Guest");
             }
             this.SettingsPath = settingsPath;
-            activeUser = null;
-            IsActiveUser = false;
-            this.SetActiveUser("Guest");
+            activeUser = getUser("Guest");
         }
 
         public List<UserData> GetAllUsersInfo()
@@ -85,27 +108,18 @@ namespace Contour
             }
             else throw new ArgumentException("UserSettings.RemoveUser(string): User " + userName + " does not exist. ");
         }
+        //TODO blog no events in constructor!
 
         public void SetActiveUser(string userName)
         {
-            IsActiveUser = true;
             activeUser = getUser(userName);
-        }
-        public int GetUserScore(string userName){
-            UserData userData = getUser(userName);           
-            return userData.Score;
+            UserNameChanged(this, new UserDataEventArgs(activeUser));     
         }
 
         public int GetUserScore()
         {
             if (activeUser == null) throw new InvalidOperationException();
             return activeUser.Score;
-        }
-
-        public void SetUserScore(string userName, int newScore) {
-            UserData userData = getUser(userName);
-            userData.Score = newScore;
-            this.Save();
         }
 
         public string GetUserName()
@@ -119,26 +133,13 @@ namespace Contour
             if (activeUser == null) throw new InvalidOperationException();
             activeUser.Score = newScore;
             this.Save();
+            UserScoreChanged(this, new UserDataEventArgs(activeUser));
         }
-
-        public void AddToUserScore(string userName, int additionToScore)
-        {
-            UserData userData = getUser(userName);
-            userData.Score += additionToScore;
-            this.Save();
-        }
-
+        
         public void AddToUserScore(int additionToScore)
         {
             if (activeUser == null) throw new InvalidOperationException();
             activeUser.Score += additionToScore;
-            this.Save();
-        }
-
-        public void ChangeUserName(string userName, string newUserName)
-        {
-            UserData userData = getUser(userName);
-            userData.Name = newUserName;
             this.Save();
         }
 
@@ -167,9 +168,6 @@ namespace Contour
             return newData;
         }
 
-        private List<UserData> AllUsers;
-        public string SettingsPath { get; private set; }
-
         private UserData getUser(string userName)
         {
             if(isUserExist(userName))
@@ -196,7 +194,9 @@ namespace Contour
             }
             return false;
         }
+        
+        private List<UserData> AllUsers;
+        public string SettingsPath { get; private set; }
         private UserData activeUser;
-        public bool IsActiveUser { get; set; }
     }   
 }

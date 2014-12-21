@@ -139,13 +139,13 @@ namespace Contour
         {
             get
             {
-                if (this.UserSettings != null && this.UserSettings.IsActiveUser)
+                if (this.UserSettings != null)
                     return this.UserSettings.GetUserScore();
                 return userScore;
             }
             set
             {
-                if (this.UserSettings != null && this.UserSettings.IsActiveUser)
+                if (this.UserSettings != null)
                     this.UserSettings.SetUserScore(value);
                 else
                     userScore = value;
