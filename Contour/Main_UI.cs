@@ -34,6 +34,7 @@ namespace Contour
             }
             NextGo();
             ui_score.Text = Convert.ToString(0);
+            ui_userName.Text = this.GameEngine.UserSettings.GetUserName();
             ui_radioAbove.Checked = true;
             initTimers();
             initUserDataList();
@@ -110,13 +111,14 @@ namespace Contour
                 ui_score.Text = GameEngine.UserScore.ToString();
                 ui_feedback.Text = "Correct!";                
                 NextGo();
+                
             }
             else {
                 ui_feedback.Text = "Incorrect"; 
             }
             this.LabelReset_Timer.Start();
         }
-
+        
         private void ui_radioAbove_CheckedChanged(object sender, EventArgs e)
         {
             this.userSelected = (int)NoteDirection.ABOVE;
@@ -175,26 +177,20 @@ namespace Contour
                 }      
             }
             ui_RemoveUsername.Text = "";  
-
         }
 
-        private Sanford.Multimedia.Timers.Timer LabelReset_Timer;
-        private GameEngine GameEngine;
-        private int userSelected;
-      
         private void ui_SetActiveUser_Click(object sender, EventArgs e)
-        {
-            
+        {         
             string activeUser = (ui_ActiveUsername.Text).Trim();
             if (activeUser != "")
             {
                 try
                 {
-                    if(this.GameEngine.UserSettings != null)
+                    if (this.GameEngine.UserSettings != null)
                         this.GameEngine.SetActiveUser(activeUser);
                     ui_score.Text = this.GameEngine.UserScore.ToString();
                     ui_userName.Text = this.GameEngine.UserSettings.GetUserName();
-                    ui_ActiveUsername.Text = "";  
+                    ui_ActiveUsername.Text = "";
                 }
                 catch (ArgumentException argEx)
                 {
@@ -203,5 +199,9 @@ namespace Contour
                 }
             }
         }
-    } 
+
+        private Sanford.Multimedia.Timers.Timer LabelReset_Timer;
+        private GameEngine GameEngine;
+        private int userSelected; 
+    }   
 }

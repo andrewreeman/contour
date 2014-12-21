@@ -10,10 +10,6 @@ using Newtonsoft.Json;
 namespace Contour
 {
 
-    //TODO stores multi user settings.
-    // File read/write
-    // Store in key/value pairs. Use jSon of XML or yaml
-    // User1{key: value, key: value} User2{key: value...}...
     class UserData
     {
         public UserData()
@@ -38,10 +34,16 @@ namespace Contour
             else
             {
                 this.AllUsers = new List<UserData>();
+                UserData defaultUser = new UserData();
+                defaultUser.Name = "Guest";
+                defaultUser.Score = 0;
+                this.AllUsers.Add(defaultUser);
+                this.SetActiveUser("Guest");
             }
             this.SettingsPath = settingsPath;
             activeUser = null;
             IsActiveUser = false;
+            this.SetActiveUser("Guest");
         }
 
         public List<UserData> GetAllUsersInfo()
@@ -144,11 +146,25 @@ namespace Contour
         {
             if (AllUsers.Count > 0)
             {
-                string output = JsonConvert.SerializeObject(AllUsers);
+                List<UserData> AllUsers_ZeroedGuest = this.AllUserData_ZeroedGuest();
+                string output = JsonConvert.SerializeObject(AllUsers_ZeroedGuest);
                 StreamWriter writer = new StreamWriter(SettingsPath);
                 writer.Write(output);
                 writer.Close();
             }
+        }
+
+        private List<UserData> AllUserData_ZeroedGuest()
+        {
+            List<UserData> newData = GetAllUsersInfo();
+            foreach (UserData user in newData)
+            {
+                if (user.Name == "Guest")
+                {
+                    user.Score = 0;
+                }
+            }
+            return newData;
         }
 
         private List<UserData> AllUsers;
