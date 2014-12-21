@@ -187,6 +187,7 @@
     <EmbeddedResource Include="Sanford.Multimedia.Midi\UI\PianoControlDialog.resx">
       <DependentUpon>PianoControlDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\GameEngine.datasource" />
     <None Include="Properties\DataSources\UserData.datasource" />
     <None Include="Properties\DataSources\UserSettings.datasource" />
     <None Include="Properties\Settings.settings">

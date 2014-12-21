@@ -41,6 +41,7 @@ namespace Contour
             }
             this.SettingsPath = settingsPath;
             activeUser = null;
+            IsActiveUser = false;
         }
 
         public List<UserData> GetAllUsersInfo()
@@ -68,6 +69,7 @@ namespace Contour
 
         public void RemoveUser(string userName)
         {
+            if (userName == activeUser.Name) throw new ArgumentException("UserSettings.RemoveUser(string): Cannot remove user: " + userName + " as this is the active user.");
             if (isUserExist(userName))
             {
                 for (int i = 0; i < AllUsers.Count; ++i)
@@ -84,6 +86,7 @@ namespace Contour
 
         public void SetActiveUser(string userName)
         {
+            IsActiveUser = true;
             activeUser = getUser(userName);
         }
         public int GetUserScore(string userName){
@@ -96,11 +99,17 @@ namespace Contour
             if (activeUser == null) throw new InvalidOperationException();
             return activeUser.Score;
         }
-      
+
         public void SetUserScore(string userName, int newScore) {
             UserData userData = getUser(userName);
             userData.Score = newScore;
             this.Save();
+        }
+
+        public string GetUserName()
+        {
+            if (activeUser == null) throw new InvalidOperationException();
+            return activeUser.Name;
         }
 
         public void SetUserScore(int newScore)
@@ -157,7 +166,7 @@ namespace Contour
                     }
                 }
             }
-            throw new ArgumentException("UserSettings.getUser(string): User name " + userName + "does not exist.");
+            throw new ArgumentException("UserSettings.getUser(string): User name " + userName + " does not exist.");
         }
 
         private bool isUserExist(string userName)
@@ -172,5 +181,6 @@ namespace Contour
             return false;
         }
         private UserData activeUser;
+        public bool IsActiveUser { get; set; }
     }   
 }

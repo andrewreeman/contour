@@ -15,11 +15,25 @@ namespace Contour
     {       
         public Main_UI()
         {
+            InitializeComponent();       
+        }
 
-            InitializeComponent();
-            this.GameEngine = new GameEngine();
+        private void Main_UI_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                this.GameEngine = null;
+                this.GameEngine = new GameEngine();
+                this.GameEngine.initUserSettings();
+            }
+            catch (System.IO.IOException ex)
+            {
+                string errorString = "Error in Main_UI.Main_UI_Load(object, EventArgs): File IO exception in UserSettings construction.";
+                errorString += ex.Message;
+                MessageBox.Show(errorString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             NextGo();
-            UpdateScore(0);
+            ui_score.Text = Convert.ToString(0);
             ui_radioAbove.Checked = true;
             initTimers();
             initUserDataList();
@@ -27,17 +41,13 @@ namespace Contour
 
         private void initUserDataList()
         {
-            try
+            if (this.GameEngine.UserSettings != null)
             {
-                List<UserData> allUserData = this.GameEngine.GetAllUsersInfo();
+                List<UserData> allUserData = this.GameEngine.UserSettings.GetAllUsersInfo();
                 foreach (UserData user in allUserData)
                 {
                     ui_userNames.Items.Add(user.Name);
                 }
-            }
-            catch (InvalidOperationException e)
-            {
-                Console.WriteLine("Error: GameEngine could not provide user settings. UserSettings object probably not initialised." + e.Message);
             }
         }
 
@@ -52,6 +62,7 @@ namespace Contour
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "Midi files (*.mid; *midi) | *.mid; *.midi; *.MID; *.MIDI";
             DialogResult result = fileDialog.ShowDialog();
@@ -60,12 +71,7 @@ namespace Contour
             }            
         }
         
-        private void UpdateScore(int score)
-        {
-            this.GameEngine.UserScore = score; //TODO data binding
-            ui_score.Text = score.ToString();
-        }
-       
+             
         //TODO test all midi files
         private void NextGo()
         {
@@ -98,12 +104,11 @@ namespace Contour
         }
 
         private void ui_submit_Click(object sender, EventArgs e)
-        {
-            if( this.GameEngine.isUserCorrect() )
+        {           
+            if( this.GameEngine.SubmitAnswer(this.userSelected) )
             {
-                ui_feedback.Text = "Correct!";
-                
-                UpdateScore(GameEngine.UserScore + 1);
+                ui_score.Text = GameEngine.UserScore.ToString();
+                ui_feedback.Text = "Correct!";                
                 NextGo();
             }
             else {
@@ -114,23 +119,19 @@ namespace Contour
 
         private void ui_radioAbove_CheckedChanged(object sender, EventArgs e)
         {
-            this.GameEngine.UserSelected = (int)NoteDirection.ABOVE;
+            this.userSelected = (int)NoteDirection.ABOVE;
         }
 
         private void ui_radioSame_CheckedChanged(object sender, EventArgs e)
         {
-            this.GameEngine.UserSelected = (int)NoteDirection.SAME;
+            this.userSelected = (int)NoteDirection.SAME;
         }
 
         private void ui_radioBelow_CheckedChanged(object sender, EventArgs e)
         {
-            this.GameEngine.UserSelected = (int)NoteDirection.BELOW;
+            this.userSelected = (int)NoteDirection.BELOW;
         }
-  
-        private Sanford.Multimedia.Timers.Timer LabelReset_Timer; 
-        private GameEngine GameEngine;
-
-      
+       
         private void ui_addUser_Click(object sender, EventArgs e)
         {
             string newUser = (ui_newUsername.Text).Trim();
@@ -170,32 +171,37 @@ namespace Contour
                 catch (ArgumentException argEx)
                 {
                     string errorString = "Error: Could not remove user. " + argEx.Message;
-                    Console.WriteLine(errorString);
                     MessageBox.Show(errorString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                }      
             }
             ui_RemoveUsername.Text = "";  
 
         }
 
-        private void ui_ActiveUsername_TextChanged(object sender, EventArgs e)
+        private Sanford.Multimedia.Timers.Timer LabelReset_Timer;
+        private GameEngine GameEngine;
+        private int userSelected;
+      
+        private void ui_SetActiveUser_Click(object sender, EventArgs e)
         {
+            
             string activeUser = (ui_ActiveUsername.Text).Trim();
             if (activeUser != "")
             {
                 try
                 {
-                    this.GameEngine.SetActiveUser(activeUser);
-                    
+                    if(this.GameEngine.UserSettings != null)
+                        this.GameEngine.SetActiveUser(activeUser);
+                    ui_score.Text = this.GameEngine.UserScore.ToString();
+                    ui_userName.Text = this.GameEngine.UserSettings.GetUserName();
+                    ui_ActiveUsername.Text = "";  
                 }
                 catch (ArgumentException argEx)
                 {
                     string errorString = "Error: Could not make user active. " + argEx.Message;
-                    Console.WriteLine(errorString);
                     MessageBox.Show(errorString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            ui_ActiveUsername.Text = "";  
-        }  
+        }
     } 
 }

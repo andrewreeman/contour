@@ -46,10 +46,14 @@
             this.ui_newUsername = new System.Windows.Forms.TextBox();
             this.ui_RemoveUser = new System.Windows.Forms.Button();
             this.ui_RemoveUsername = new System.Windows.Forms.TextBox();
-            this.userSettingsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ui_ActiveUsername = new System.Windows.Forms.TextBox();
             this.ui_SetActiveUser = new System.Windows.Forms.Button();
+            this.gameEngineBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userSettingsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.ui_userName = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.gameEngineBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userSettingsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -234,21 +238,12 @@
             this.ui_RemoveUsername.Size = new System.Drawing.Size(100, 20);
             this.ui_RemoveUsername.TabIndex = 18;
             // 
-            // userSettingsBindingSource
-            // 
-            this.userSettingsBindingSource.DataSource = typeof(Contour.UserSettings);
-            // 
-            // userDataBindingSource
-            // 
-            this.userDataBindingSource.DataSource = typeof(Contour.UserData);
-            // 
             // ui_ActiveUsername
             // 
             this.ui_ActiveUsername.Location = new System.Drawing.Point(115, 246);
             this.ui_ActiveUsername.Name = "ui_ActiveUsername";
             this.ui_ActiveUsername.Size = new System.Drawing.Size(100, 20);
             this.ui_ActiveUsername.TabIndex = 20;
-            this.ui_ActiveUsername.TextChanged += new System.EventHandler(this.ui_ActiveUsername_TextChanged);
             // 
             // ui_SetActiveUser
             // 
@@ -258,7 +253,40 @@
             this.ui_SetActiveUser.TabIndex = 19;
             this.ui_SetActiveUser.Text = "Set active";
             this.ui_SetActiveUser.UseVisualStyleBackColor = true;
-
+            this.ui_SetActiveUser.Click += new System.EventHandler(this.ui_SetActiveUser_Click);
+            // 
+            // gameEngineBindingSource
+            // 
+            this.gameEngineBindingSource.DataSource = typeof(Contour.GameEngine);
+            // 
+            // userSettingsBindingSource
+            // 
+            this.userSettingsBindingSource.DataSource = typeof(Contour.UserSettings);
+            // 
+            // userDataBindingSource
+            // 
+            this.userDataBindingSource.DataSource = typeof(Contour.UserData);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Franklin Gothic Book", 12F);
+            this.label3.Location = new System.Drawing.Point(565, 117);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 21);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "User:";
+            // 
+            // ui_userName
+            // 
+            this.ui_userName.AutoSize = true;
+            this.ui_userName.Font = new System.Drawing.Font("Franklin Gothic Book", 18F);
+            this.ui_userName.ForeColor = System.Drawing.Color.BlueViolet;
+            this.ui_userName.Location = new System.Drawing.Point(623, 117);
+            this.ui_userName.Name = "ui_userName";
+            this.ui_userName.Size = new System.Drawing.Size(125, 30);
+            this.ui_userName.TabIndex = 22;
+            this.ui_userName.Text = "User name";
             // 
             // Main_UI
             // 
@@ -266,6 +294,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(766, 262);
+            this.Controls.Add(this.ui_userName);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.ui_ActiveUsername);
             this.Controls.Add(this.ui_SetActiveUser);
             this.Controls.Add(this.ui_RemoveUsername);
@@ -287,6 +317,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Main_UI";
             this.Load += new System.EventHandler(this.Main_UI_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gameEngineBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userSettingsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -317,6 +348,9 @@
         private System.Windows.Forms.TextBox ui_RemoveUsername;
         private System.Windows.Forms.TextBox ui_ActiveUsername;
         private System.Windows.Forms.Button ui_SetActiveUser;
+        private System.Windows.Forms.BindingSource gameEngineBindingSource;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label ui_userName;
     }
 }
 
